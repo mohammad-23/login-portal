@@ -1,0 +1,115 @@
+body {
+    background: #e6f2ff;
+    font-family: sans-serif;
+}
+
+.container {
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+.col-sm-12 col-md-8 {
+    display: block;
+    margin: 0 auto;
+}
+
+.card {
+    padding: 20px 0 20px;
+    background: #f4f4f4;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+img.img-signin{
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+    width: 40%;
+}
+
+form.signinform {
+    max-width: 65%;
+    margin: auto;
+}
+
+
+#nameinput {
+    margin-top: 20px;
+}
+
+
+.password-control {
+    display: block;
+    width: 100%;
+    border: 1px;
+    padding: 8px 12px;
+    line-height: 1.25;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: .25rem;
+    color: #464a4c;
+    font-weight: 400;
+}
+
+#passwordinput {
+    display: block;
+    width: 100%;
+}
+
+#inputPasswordConfirm {
+    display: block;
+    width: 100%;
+}
+
+.help-block {
+    display: block;
+    width: 100%;
+    padding-top: .25rem;
+    padding-bottom: .5rem;
+}
+
+.btn-info {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+
+#rememberme {
+    margin-right: 10px;
+}
+
+
+.signup {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,77 @@
+body {
+    background: #e6f2ff;
+}
+
+.container {
+    margin-top: 8%;
+    margin-bottom: 8%;
+}
+
+.card {
+    padding: 20px 0 20px;
+    background: #f4f4f4;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+
+
+img.img-signin{
+    margin: auto;
+    display: block;
+    border-radius: 10px;
+    width: 40%;
+}
+
+form.signinform {
+    max-width: 65%;
+    margin: auto;
+}
+
+#emailinput {
+    margin-top: 20px;
+}
+
+.btn-info {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#rememberme {
+    margin: 6px 10px 0px -20px;
+}
+
+
+.signup {
+    display: block;
+    margin-top: 20px;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

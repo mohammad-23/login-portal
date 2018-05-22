@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const validator = require('validator');
+mongoose.Promise = global.Promise;
 
 var UserSchema = new mongoose.Schema({
     name: {
@@ -11,7 +12,6 @@ var UserSchema = new mongoose.Schema({
     username: {
         type: String,
         required: true,
-        unique: true,
         minLength: 1
     },
     email: {
@@ -19,7 +19,6 @@ var UserSchema = new mongoose.Schema({
         required: true,
         minLength: 1,
         trim: true,
-        unique: true,
         validate: {
             validator: validator.isEmail,
             message: '{VALUE} is not a valid email'
@@ -42,28 +41,7 @@ var UserSchema = new mongoose.Schema({
     //    }]
 });
 
-//UserSchema.pre('save', function (next) {
-//
-//    bcrypt.genSalt(10, (err, salt) => {
-//        bcrypt.hash(User.password, salt, (err, hash) => {
-//            if (err) throw err;
-//            newUser.password = hash;
-//            newUser.save((err, user) => {
-//                    if (err) {
-//                        return err;
-//                    }
-//                })
-//                .then((user) => {
-//                    res.redirect('/welcome');
-//                }).catch(err) => {
-//                    if (err) {
-//                        console.log(err);
-//                    }
-//                }
-//        });
-//    });
-//    next();
-//})
+
 const User = mongoose.model('users', UserSchema);
 module.exports = {
     User

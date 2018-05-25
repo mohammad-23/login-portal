@@ -9,14 +9,16 @@ const flash = require('connect-flash');
 const session = require('express-session');
 
 const {User} = require('./models/User');
-//const {checkUserName, checkEmail} = require('./helper/userHelper');
 const userHelper = require('./helper/userHelper');
+require('./config/passport')(passport);
+const {ensureAuthenticated} = require('./helper/auth');
+const db = require('./config/database');
 
 const port = process.env.PORT || 3000;
 
 var app = express();
 
-mongoose.connect('mongodb://localhost/login-portal')
+mongoose.connect(db.mongoURI)
     .then(() => console.log('Mongoose Connected'));
 mongoose.Promise = global.Promise;
 
@@ -34,6 +36,11 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
 }));
+
+// Passport-Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(flash());
 
@@ -53,13 +60,20 @@ app.get('/signup', (req, res) => {
     res.render('signup.hbs');
 });
 
-app.get('/welcome', (req, res) => {
+app.get('/welcome', ensureAuthenticated, (req, res) => {
     res.render('welcome.hbs');
 });
 
-app.get('/about', (req, res) => {
+app.get('/about', ensureAuthenticated, (req, res) => {
     res.render('about.hbs');
 });
+
+
+app.post('/', passport.authenticate('local', {
+        failureRedirect: '/',
+        successRedirect: '/welcome',
+        failureFlash: true,
+}));
 
 app.post('/signup', async (req, res) => {
     let errors = [];
@@ -102,6 +116,7 @@ app.post('/signup', async (req, res) => {
             password2: req.body.password2
         });
     }
+    
     const newUser = new User({
         name: req.body.name,
         email: req.body.email,
@@ -119,35 +134,34 @@ app.post('/signup', async (req, res) => {
     });
 });
 
+app.get('/logout', (req, res) => {
+    req.logout();
+    req.flash('success_msg', 'You Have Logged out');
+    res.redirect('/');
+})
+
 
 app.listen(port, () => {
     console.log(`Server is up on ${port}`);
 });
 
 //else {
-//            User.findOne({
-//                    email: req.body.email
-//                })
-//                .then((user) => {
-//                        if (user) {
-//                            req.flash('error_msg', 'This Email is already registered');
-//                            res.redirect('/');
-//                        } else {
-//                            User.findOne({
-//                                    username: req.body.username
-//                                })
-//                                .then((user) => {
-//                                        if (user) {
-//                                            req.flash('error_msg', 'This Username is already in use');
-//                                            res.redirect('/signup');
-//                                        } else {})
-//                                    //                        .catch((e) => {
-//                                    //                            console.log(e);
-//                                    //                        });
-//                                }
-//                        })
-//                    //            .catch((e) => {
-//                    //                console.log(e);
-//                    //            });
+//    User.findOne({email: req.body.email}).then((user) => {
+//        if (user) {
+//            req.flash('error_msg', 'This Email is already registered');
+//            res.redirect('/');
+//        } else {
+//            User.findOne({username: req.body.username}).then((user) => {
+//                if (user) {
+//                    req.flash('error_msg', 'This Username is already in use');
+//                    res.redirect('/signup');
 //                }
-//        });
+//            }).catch((e) => {
+//                console.log(e);
+//            });
+//        }
+//    }).catch((e) => {
+//        console.log(e);
+//    });
+//}
+    

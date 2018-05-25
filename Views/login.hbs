@@ -17,7 +17,8 @@
 </head>
 
 <body>
-    {{> _msg}}    
+{{> _msg}}  
+{{> _errors}}
 
     <div class="container">
         <div class="row">
@@ -26,7 +27,7 @@
                 <div class="card">
                     <div class=card-block>
                         <img src="/Assets/logo.jpg" class="img-fluid img-signin">
-                        <form class="signinform">
+                        <form method="post" action="/" class="signinform">
                             <div class="form-group">
                                 <input type="email" class="form-control" id="emailinput" aria-describedby="emailHelp" name="email" placeholder="Enter email">
                             </div>
